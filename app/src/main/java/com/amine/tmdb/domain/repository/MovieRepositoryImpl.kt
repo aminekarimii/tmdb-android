@@ -14,6 +14,10 @@ class MovieRepositoryImpl @Inject constructor(
     private val service: MovieService
 ) : MovieRepository {
 
+    companion object {
+        const val NETWORK_PAGE_SIZE = 50
+    }
+
     override fun getMoviesList(query: String?): Flow<PagingData<MovieEntity>> {
         return Pager(
             config = PagingConfig(
@@ -23,9 +27,4 @@ class MovieRepositoryImpl @Inject constructor(
             pagingSourceFactory = { MovieSource(service, "action") }
         ).flow
     }
-
-    companion object {
-        const val NETWORK_PAGE_SIZE = 50
-    }
-
 }
