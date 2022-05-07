@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.amine.tmdb.data.local.AppDatabase
-import com.amine.tmdb.data.local.entities.MovieEntity
+import com.amine.tmdb.data.local.model.MovieEntity
 import com.amine.tmdb.data.remote.MovieService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

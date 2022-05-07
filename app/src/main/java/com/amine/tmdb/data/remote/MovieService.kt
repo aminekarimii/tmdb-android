@@ -1,7 +1,6 @@
 package com.amine.tmdb.data.remote
 
-import com.amine.tmdb.data.local.entities.MovieEntity
-import retrofit2.Response
+import com.amine.tmdb.data.local.model.MovieEntity
 import retrofit2.http.GET
 import retrofit2.http.Query
 

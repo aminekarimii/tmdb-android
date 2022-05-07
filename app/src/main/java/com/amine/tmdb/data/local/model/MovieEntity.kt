@@ -1,4 +1,4 @@
-package com.amine.tmdb.data.local.entities
+package com.amine.tmdb.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -2,7 +2,7 @@ package com.amine.tmdb.domain.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.amine.tmdb.data.local.entities.MovieEntity
+import com.amine.tmdb.data.local.model.MovieEntity
 import com.amine.tmdb.data.remote.MovieService
 import retrofit2.HttpException
 import java.io.IOException
