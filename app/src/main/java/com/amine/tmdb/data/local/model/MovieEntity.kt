@@ -8,14 +8,14 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "movie")
 data class MovieEntity(
     @PrimaryKey val id: Int,
-    @field:SerializedName("popularity") val popularity: Double,
-    @field:SerializedName("overview") val overview: String,
-    @field:SerializedName("name") val name: String,
-    @field:SerializedName("originalName") val originalName: String,
-    @field:SerializedName("backdrop_path") @ColumnInfo(name = "backdrop_path") val backdropPath: String?,
-    @field:SerializedName("first_air_date") @ColumnInfo(name = "vote_average") val voteAverage: Int,
-    @field:SerializedName("original_language") @ColumnInfo(name = "first_air_date") val firstAirDate: String,
-    @field:SerializedName("poster_path") @ColumnInfo(name = "original_language") val originalLanguage: String,
-    @field:SerializedName("vote_average") @ColumnInfo(name = "poster_path") val posterPath: String?,
-    @field:SerializedName("vote_count") @ColumnInfo(name = "vote_count") val voteCount: Int
+    @SerializedName("popularity") val popularity: Double,
+    @SerializedName("overview") val overview: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("original_name") val originalName: String,
+    @SerializedName("backdrop_path") @ColumnInfo(name = "backdrop_path") val backdropPath: String?,
+    @SerializedName("first_air_date") @ColumnInfo(name = "vote_average") val voteAverage: String,
+    @SerializedName("original_language") @ColumnInfo(name = "first_air_date") val firstAirDate: String,
+    @SerializedName("poster_path") @ColumnInfo(name = "original_language") val originalLanguage: String,
+    @SerializedName("vote_average") @ColumnInfo(name = "poster_path") val posterPath: String?,
+    @SerializedName("vote_count") @ColumnInfo(name = "vote_count") val voteCount: Int
 )
