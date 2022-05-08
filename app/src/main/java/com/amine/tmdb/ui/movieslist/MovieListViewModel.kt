@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.amine.tmdb.data.local.model.MovieEntity
-import com.amine.tmdb.domain.repository.MovieRepositoryImpl
+import com.amine.tmdb.domain.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
-    repository: MovieRepositoryImpl,
+    repository: MovieRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
