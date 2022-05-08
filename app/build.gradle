@@ -31,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -42,6 +45,7 @@ dependencies {
 
     // kotlin
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
