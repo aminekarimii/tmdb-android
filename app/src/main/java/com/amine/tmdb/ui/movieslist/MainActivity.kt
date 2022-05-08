@@ -1,6 +1,9 @@
 package com.amine.tmdb.ui.movieslist
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,12 +19,15 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var moviesAdapter: MoviesAdapter
     private val viewModel by viewModels<MovieListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        moviesAdapter = MoviesAdapter()
 
         binding.bindState(
             uiState = viewModel.state,
@@ -35,12 +41,72 @@ class MainActivity : AppCompatActivity() {
         pagingData: Flow<PagingData<MovieEntity>>,
         uiActions: (UiAction) -> Unit
     ) {
+        bindSearch(
+            uiState = uiState,
+            onQueryChanged = uiActions
+        )
+
         bindList(
-            moviesAdapter = MoviesAdapter(),
+            moviesAdapter = moviesAdapter,
             uiState = uiState,
             pagingData = pagingData,
             onScrollChanged = uiActions
         )
+    }
+
+    private fun searchMovies(
+        searchMovies: EditText,
+        recyclerView: RecyclerView,
+        onQueryChanged: (UiAction.Search) -> Unit
+    ) {
+        searchMovies.text.trim().let {
+            if (it.isNotEmpty()) {
+                recyclerView.scrollToPosition(0)
+                onQueryChanged(UiAction.Search(query = it.toString()))
+            }
+        }
+    }
+
+    private fun ActivityMainBinding.bindSearch(
+        uiState: StateFlow<UiState>,
+        onQueryChanged: (UiAction.Search) -> Unit
+    ) {
+        searchMovies.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_GO) {
+                searchMovies(
+                    searchMovies,
+                    recyclerView,
+                    onQueryChanged
+                )
+                true
+            } else {
+                false
+            }
+        }
+
+        searchMovies.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                searchMovies(
+                    searchMovies,
+                    recyclerView,
+                    onQueryChanged
+                )
+
+                true
+            } else {
+                false
+            }
+        }
+
+        lifecycleScope.launch {
+            uiState
+                .map { it.query }
+                .distinctUntilChanged()
+                .collect {
+                    searchMovies.setText(it)
+                }
+        }
+
     }
 
     private fun ActivityMainBinding.bindList(
@@ -49,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         pagingData: Flow<PagingData<MovieEntity>>,
         onScrollChanged: (UiAction.Scroll) -> Unit
     ) {
-        with(recyclerView){
+        with(recyclerView) {
             adapter = moviesAdapter
 
             layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -81,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         ).distinctUntilChanged()
 
         lifecycleScope.launchWhenCreated {
-            pagingData.collectLatest{
+            pagingData.collectLatest {
                 moviesAdapter.submitData(it)
             }
         }

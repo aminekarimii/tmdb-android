@@ -52,7 +52,7 @@ class MovieListViewModel @Inject constructor(
             .onStart { emit(UiAction.Scroll(currentQuery = lastQueryScrolled)) }
 
         pagingDataFlow = searches
-            .flatMapLatest { repository.getMoviesList() }
+            .flatMapLatest { repository.getMoviesList(query = it.query) }
             .cachedIn(viewModelScope)
 
         state = combine(
