@@ -34,6 +34,7 @@ object AppModule {
             context,
             AppDatabase::class.java,
             "tmdb_movies_db"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 }

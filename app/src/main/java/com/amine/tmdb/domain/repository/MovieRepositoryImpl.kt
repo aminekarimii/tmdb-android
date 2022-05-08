@@ -1,5 +1,6 @@
 package com.amine.tmdb.domain.repository
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -19,12 +20,20 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getMoviesList(query: String?): Flow<PagingData<MovieEntity>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MovieSource(service, "action") }
+            remoteMediator = MovieRemoteMediator(
+                query = "action",
+                service = service,
+                database = database
+            ),
+            pagingSourceFactory = {
+                database.getMovieDao().getAllMoviesByName(query.orEmpty())
+            }
         ).flow
     }
 }

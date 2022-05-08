@@ -58,9 +58,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     if (dy != 0) {
                         onScrollChanged(UiAction.Scroll(currentQuery = uiState.value.query))
-                        if (dy == 100){
-                            moviesAdapter.refresh()
-                        }
                     }
                 }
             })
