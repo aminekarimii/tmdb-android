@@ -3,12 +3,14 @@ package com.amine.tmdb.ui.movieslist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.amine.tmdb.R
 import com.amine.tmdb.data.local.model.MovieEntity
 import com.amine.tmdb.databinding.MovieViewItemBinding
+import com.bumptech.glide.Glide
 
 
 class MoviesAdapter :
@@ -37,6 +39,20 @@ class MoviesAdapter :
             movieName.text = movie.name
             popularityTextview.text = movie.popularity.toString()
             voteCountTextview.text = movie.voteCount.toString()
+
+            val imageUrl = "https://image.tmdb.org/t/p/w154${movie.posterPath}"
+            moviePoster.loadImage(imageUrl)
+        }
+
+        private fun ImageView.loadImage(url: String) {
+            val imageNotFoundUrl =
+                "https://www.sicilywelcome.com/assets/images/placeholders/no-img-placeholder.png";
+
+            Glide.with(this)
+                .load(url)
+                .centerCrop()
+                .error(imageNotFoundUrl)
+                .into(this)
         }
     }
 
