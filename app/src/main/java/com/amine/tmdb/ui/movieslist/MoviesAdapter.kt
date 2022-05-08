@@ -37,7 +37,7 @@ class MoviesAdapter :
 
         private fun MovieViewItemBinding.bindMovie(movie: MovieEntity) {
             movieName.text = movie.name
-            popularityTextview.text = movie.popularity.toString()
+            popularityTextview.text =  movie.voteAverage
             voteCountTextview.text = movie.voteCount.toString()
 
             val imageUrl = "https://image.tmdb.org/t/p/w154${movie.posterPath}"

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    app:cardElevation="8dp"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true"
-    android:layout_height="wrap_content">
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,9 +15,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="@dimen/movie_cardview_height">
 
             <ImageView
+                android:id="@+id/movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -34,20 +36,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:text="Spider Man"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/white" />
 
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
 
             <TextView
                 android:id="@+id/popularity_textview"
@@ -55,18 +57,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:gravity="center"
-                android:text="9.0"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                app:drawableStartCompat ="@android:drawable/btn_star" />
+                android:textAppearance="?attr/textAppearanceBody2"
+                app:drawableStartCompat="@drawable/ic_baseline_star"
+                tools:text="9.0" />
 
             <TextView
                 android:id="@+id/vote_count_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:drawableStartCompat ="@android:drawable/btn_star"
                 android:gravity="center"
-                android:text="203"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+                android:textAppearance="?attr/textAppearanceBody2"
+                app:drawableStartCompat="@drawable/ic_baseline_person"
+                tools:text="203" />
         </LinearLayout>
     </LinearLayout>
 
